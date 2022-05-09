@@ -77,6 +77,9 @@ Latest version
 Specify version
 > $ docker image pull nginx:1.20.0
 
+## **Create Image**
+> $ docker image tag ***OLD REPOSITORY NAME*** ***NEW/NAME:1.0***
+
 ## **Create Container**
 > $ docker container run nginx
 
@@ -97,7 +100,6 @@ old:
 > $ docker container ps -a
 
 new:
-
 > $ docker container ls -a
 
 ### **List all of containers ID**
@@ -114,13 +116,13 @@ Exit in batches:
 ## **Remove**
 ### **image**
 In some situation it needs to remove container first then remove image
-> $ docker image rm ***IMAGE NAME*** or ***IMAGE ID*** 
+> $ docker image rm ***[IMAGE NAME]*** or ***[IMAGE ID]*** 
 
 ### **images or Containers in batches**
 > $ docker container rm \$(docker container ps -qa)
 
 ### **Force to remove container when container is running**
-> $ docker container rm ***CONTAINER ID*** -f 
+> $ docker container rm ***[CONTAINER ID]*** -f 
 
 ## **Attached ***vs*** Detached**
 attached mode is not using -d. detached mode is using -d:
@@ -139,3 +141,19 @@ Save nginx:1.20.0 to nginx.image in local PC
 Load file and export to image 
 > $ docker image load -i nginx.image
 
+## **Login with your Docker ID to push and pull images from Docker Hub**
+Login to Docker Hub:
+> $ docker login
+```
+Username: ****
+Password: ****
+Login Succeeded
+```
+Push to Docker Hub:
+> $ docker image push ***[DOCKER ID/IMAGE NAME:TAG]***
+
+Pull from Docker Hub:
+> $ docker pull ***[DOCKER ID/IMAGE NAME:TAG]***
+
+## **Create a new image from a container**
+> $ docker container commit ***[OLD CONTAINER ID]*** ***[NEW DOCKER ID/IMAGE NAME:TAG]***
