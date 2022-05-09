@@ -157,3 +157,6 @@ Pull from Docker Hub:
 
 ## **Create a new image from a container**
 > $ docker container commit ***[OLD CONTAINER ID]*** ***[NEW DOCKER ID/IMAGE NAME:TAG]***
+
+## **List image layer**
+> $ docker image history ***[IMAGE NAME]***
