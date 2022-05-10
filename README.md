@@ -39,7 +39,7 @@
 - Dockerfile has grammar rules
 
 Example:
-```
+```dockerfile
 FROM ubuntu:21.04
 RUN apt-get && \
 DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y python3.9-pip python3-pip python3.9-dev
@@ -52,7 +52,7 @@ Build it in the folder which has dockerfile and python file, **-t hello** is mea
 <span style="color:green;">**RUN**</span> is command when use Dockerfile. For example install or download commands. Each line of <span style="color:green;">**RUN**</span> command can generate a layer of Image layer.
 
 Multi-layer ex:
-```
+```dockerfile
 FROM ubuntu:21.04
 RUN apt-get update
 RUN apt-get install -y wget
@@ -62,7 +62,7 @@ RUN mv ipinfo_2.0.1_linux_amd64 /usr/bin/ipinfo
 RUN rm -rf ipinfo_2.0.1_linux_amd64.tar.gz
 ```
 One layer ex:
-```
+```dockerfile
 FROM ubuntu:21.04
 RUN apt-get update && \
     apt-get install -y wget && \
