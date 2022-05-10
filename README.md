@@ -49,6 +49,35 @@ CMD ["python3", "/hello.py"]
 Build it in the folder which has dockerfile and python file, **-t hello** is meaning tag the hello to latest version
 > $ docker image build -t hello .
 
+<span style="color:green;">**RUN**</span> is command when use Dockerfile. For example install or download commands. Each line of <span style="color:green;">**RUN**</span> command can generate a layer of Image layer.
+
+Multi-layer ex:
+```
+FROM ubuntu:21.04
+RUN apt-get update
+RUN apt-get install -y wget
+RUN wget https://github.com/ipinfo/cli/releases/download/ipinfo-2.0.1/ipinfo_2.0.1_linux_amd64.tar.gz
+RUN tar zxf ipinfo_2.0.1_linux_amd64.tar.gz
+RUN mv ipinfo_2.0.1_linux_amd64 /usr/bin/ipinfo
+RUN rm -rf ipinfo_2.0.1_linux_amd64.tar.gz
+```
+One layer ex:
+```
+FROM ubuntu:21.04
+RUN apt-get update && \
+    apt-get install -y wget && \
+    wget https://github.com/ipinfo/cli/releases/download/ipinfo-2.0.1/ipinfo_2.0.1_linux_amd64.tar.gz && \
+    tar zxf ipinfo_2.0.1_linux_amd64.tar.gz && \
+    mv ipinfo_2.0.1_linux_amd64 /usr/bin/ipinfo && \
+    rm -rf ipinfo_2.0.1_linux_amd64.tar.gz
+```
+
+
+## **How to choose image**   
+- Choose official, if there is no official, choose Dockerfile
+- Prefer tag version
+- Choose size as small as possible
+
 ## **Check Out**
 ### **Environment** 
 > $ docker info 
