@@ -72,6 +72,13 @@ RUN apt-get update && \
     rm -rf ipinfo_2.0.1_linux_amd64.tar.gz
 ```
 
+## **File copy and directory operation**
+**COPY** and **ADD** are both for copy file from local to image, and if the image doesn't have directory, it will be generated.
+The difference is **ADD** has unzip features.
+```dockerfile
+FROM python:3.9.5-alpine3.13
+ADD hello.tar.gz /app
+```
 
 ## **How to choose image**   
 - Choose official, if there is no official, choose Dockerfile
