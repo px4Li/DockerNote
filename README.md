@@ -113,6 +113,20 @@ RUN apt-get update && \
 
 **ARG** value is able to be modified when the image is building by **--build-arg**
 
+The command of **CMD** can be overwrote when this command is running `docker container run + command`
+The command of **ENTRYPOINT** must be executed
+**CMD** and **ENTRYPOINT** support both shell format and Exec format.
+Shell ex:
+```dockerfile
+CMD echo "hello docker"
+ENTRYPOINT echo "hello docker"
+```
+Exec ex:
+```dockerfile
+CMD ["echo", "hello docker"]
+ENTRYPOINT ["echo", "hello docker"]
+```
+
 Image build ex:
 ```terminal
 $ docker image build -f .\Dockerfile-arg -t ipinfo-arg-2.0.0 --build-arg VERSION=2.0.0 .
