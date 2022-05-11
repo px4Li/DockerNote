@@ -205,6 +205,12 @@ In some situation it needs to remove container first then remove image
 ### **images or Containers in batches**
 > $ docker container rm \$(docker container ps -qa)
 
+remove all containers:
+> $ docker system prune -f
+
+remove all images:
+> $ docker image prune -a
+
 ### **Force to remove container when container is running**
 > $ docker container rm ***[CONTAINER ID]*** -f 
 
