@@ -4,6 +4,8 @@
 
 **Offical [Docker Documents](https://docs.docker.com/get-started/overview/ "English")**
 
+**vsupalov [nice doc](https://vsupalov.com/docker/)**
+
 ## **Image** ***vs*** **Container**
 - Image:
     1. It is <span style="color: red;">read-only</span> file
@@ -72,13 +74,59 @@ RUN apt-get update && \
     rm -rf ipinfo_2.0.1_linux_amd64.tar.gz
 ```
 
-## **File copy and directory operation**
+## **File copy and directory operation (COPY vs ADD)**
 **COPY** and **ADD** are both for copy file from local to image, and if the image doesn't have directory, it will be generated.
 The difference is **ADD** has unzip features.
 ```dockerfile
 FROM python:3.9.5-alpine3.13
 ADD hello.tar.gz /app
 ```
+
+## **Build argument and environment variable (ARG vs ENV)**
+**ARG** is only available during the build of a Docker image(RUN etc), not after the image is created and containers are started from it (ENTRYPOINT, CMD)
+
+Dockerfile ex:
+```dockerfile
+FROM ubuntu:21.04
+ENV VERSION=2.0.1
+RUN apt-get update && \
+    apt-get install -y wget && \
+    wget https://github.com/ipinfo/cli/releases/download/ipinfo-${VERSION}/ipinfo_${VERSION}_linux_amd64.tar.gz && \
+    tar zxf ipinfo_${VERSION}_linux_amd64.tar.gz && \
+    mv ipinfo_${VERSION}_linux_amd64 /usr/bin/ipinfo && \
+    rm -rf ipinfo_${VERSION}_linux_amd64.tar.gz
+```
+
+**ENV** values are available to containers, but also RUN-style commands during the Docker build starting with the line where they are introduced.
+
+Dockerfile ex:
+```dockerfile
+FROM ubuntu:21.04
+ARG VERSION=2.0.1
+RUN apt-get update && \
+    apt-get install -y wget && \
+    wget https://github.com/ipinfo/cli/releases/download/ipinfo-${VERSION}/ipinfo_${VERSION}_linux_amd64.tar.gz && \
+    tar zxf ipinfo_${VERSION}_linux_amd64.tar.gz && \
+    mv ipinfo_${VERSION}_linux_amd64 /usr/bin/ipinfo && \
+    rm -rf ipinfo_${VERSION}_linux_amd64.tar.gz
+```
+
+**ARG** value is able to be modified when the image is building by **--build-arg**
+
+Image build ex:
+```terminal
+$ docker image build -f .\Dockerfile-arg -t ipinfo-arg-2.0.0 --build-arg VERSION=2.0.0 .
+$ docker image ls
+REPOSITORY         TAG       IMAGE ID       CREATED          SIZE
+ipinfo-arg-2.0.0   latest    0d9c964947e2   6 seconds ago    124MB
+$ docker container run -it ipinfo-arg-2.0.0
+root@b64285579756:/#
+root@b64285579756:/# ipinfo version
+2.0.0
+root@b64285579756:/#
+```
+Here is a simplified overview of **ARG** and **ENV** availabilities around the process around building a Docker image from a Dockerfile, and running a container. They overlap, but **ARG** is not usable from inside the containers.
+![ARG vs ENV!](arg_vs_env.png "graph 3")
 
 ## **How to choose image**   
 - Choose official, if there is no official, choose Dockerfile
