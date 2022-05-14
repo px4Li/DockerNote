@@ -205,6 +205,12 @@ Here is a simplified overview of **ARG** and **ENV** availabilities around the p
     CMD ["flask", "run", "-h", "0.0.0.0"]
     ```
 
+## **Container**
+- It is running container
+- It is copied image, and added `read-write` on top (called `container layer`)
+- Create multiple container from one image
+![Container layer](container_layer.png "Container layer")
+
 ## **How to choose image**   
 - Choose official, if there is no official, choose Dockerfile
 - Prefer tag version
@@ -300,7 +306,11 @@ Using attached mode
 
 **But not recommend to use attached mode because when press ctrl+c it will exit a container**
 
-## **Save**
+## **Docker storage**
+- Data Volume, managed by Docker (/var/lib/docker/volumes/Linux)
+- Bind Mount, specified location by user to storage data
+![Docker Storage](docker_storage.png "docker storage approaches")
+
 Save nginx:1.20.0 to nginx.image in local PC
 > $ docker image save nginx:1.20.0 -o nginx.image
 
