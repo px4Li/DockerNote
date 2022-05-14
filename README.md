@@ -181,6 +181,30 @@ Here is a simplified overview of **ARG** and **ENV** availabilities around the p
     output:
     > Hello Docker
 
+- **How to use no root user**
+    - through **groupadd** and **useradd** to create group and user of flask
+    - through **USER** to specify following commands to run as the user of flask
+
+    ```dockerfile
+    FROM python:3.9.5-slim
+
+    RUN pip install flask && \
+        groupadd -r flask && useradd -r -g flask flask && \
+        mkdir /src && \
+        chown -R flask:flask /src
+
+    USER flask
+
+    COPY app.py /src/app.py
+
+    WORKDIR /src
+    ENV FLASK_APP=app.py
+
+    EXPOSE 5000
+
+    CMD ["flask", "run", "-h", "0.0.0.0"]
+    ```
+
 ## **How to choose image**   
 - Choose official, if there is no official, choose Dockerfile
 - Prefer tag version
