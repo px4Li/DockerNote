@@ -152,6 +152,8 @@ Here is a simplified overview of **ARG** and **ENV** availabilities around the p
 As far as possible, put files that need to be modified frequently behind those that do not need to be modified.
 ![first build](/flask_demo/mv_app_behind.png "move app.py command behind other command in dockerfile")
 
+**.dockerignore:** reduce build content, increase build speed, and protect files
+
 ## **How to choose image**   
 - Choose official, if there is no official, choose Dockerfile
 - Prefer tag version
