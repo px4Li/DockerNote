@@ -142,7 +142,8 @@ root@b64285579756:/#
 Here is a simplified overview of **ARG** and **ENV** availabilities around the process around building a Docker image from a Dockerfile, and running a container. They overlap, but **ARG** is not usable from inside the containers.
 ![ARG vs ENV!](arg_vs_env.png "graph 3")
 
-**note**: If you change a layer of dockerfile commands or program files about a layer, the cache will not be used after this layer. 
+## **Dockerfile Skill**
+**CACHED:** If you change a layer of dockerfile commands or program files about a layer, the cache will not be used after this layer. 
 
 ![first build](/flask_demo/first_build.png "first build")
 
