@@ -311,6 +311,22 @@ Using attached mode
 - Bind Mount, specified location by user to storage data
 ![Docker Storage](docker_storage.png "docker storage approaches")
 
+**docker volume**
+- List up all volume:
+  > $ docker volume ls
+  
+  Find the local of you pc:
+  > docker volume inspect ***volume name***
+  
+  but you only can find the directory in linux.
+
+  Remove all volumes:
+  > $ docker volume prune
+
+  Every time new container is generated, a new Volume repository will be generated accordingly by system. But we can specify a volume repository for using -v:
+  > $ docker container run -d -v ***any_volume_name:/path*** ***image_repository_name***
+
+
 Save nginx:1.20.0 to nginx.image in local PC
 > $ docker image save nginx:1.20.0 -o nginx.image
 
