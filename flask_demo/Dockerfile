@@ -1,11 +1,13 @@
 FROM python:3.9.5-slim
 
-COPY app.py /src/app.py
+
 
 RUN pip install flask
 
 WORKDIR /src
 ENV FLASK=app.py
+
+COPY app.py /src/app.py
 
 EXPOSE 5000
 

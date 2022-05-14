@@ -142,6 +142,15 @@ root@b64285579756:/#
 Here is a simplified overview of **ARG** and **ENV** availabilities around the process around building a Docker image from a Dockerfile, and running a container. They overlap, but **ARG** is not usable from inside the containers.
 ![ARG vs ENV!](arg_vs_env.png "graph 3")
 
+**note**: If you change a layer of dockerfile commands or program files about a layer, the cache will not be used after this layer. 
+
+![first build](/flask_demo/first_build.png "first build")
+
+![changed app.py build](/flask_demo/changed_app_py.png "changed app.py")
+
+As far as possible, put files that need to be modified frequently behind those that do not need to be modified.
+![first build](/flask_demo/mv_app_behind.png "move app.py command behind other command in dockerfile")
+
 ## **How to choose image**   
 - Choose official, if there is no official, choose Dockerfile
 - Prefer tag version
