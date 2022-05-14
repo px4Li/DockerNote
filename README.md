@@ -35,10 +35,12 @@
 ![Image Acquisition!](image_acquisition.png "graph 2")
 
 
-## **Dockerfile**
+## [**Dockerfile**](https://docs.docker.com/engine/reference/builder/)
 - Dockerfile constructs docker image
 - Dockerfile includes commands
 - Dockerfile has grammar rules
+
+[**Official Dockerfile Example**](https://github.com/docker-library/official-images)
 
 Example:
 ```dockerfile
